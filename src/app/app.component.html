@@ -1,0 +1,19 @@
+<div class="container">
+	<h1 class="text title uppercase">Planner</h1>
+	<form #form="ngForm" (submit)="addEmptyTask()">
+		<input type="submit" class="button text white uppercase" value='Add new task'/>
+		<div class="tasks" *ngFor="let task of tasks; let ind = index">
+			<div class="icons add-subtask" (click)="addEmptyTask(task)"></div>
+			<span class="task-number text">{{ind + 1}}.</span>
+			<input class="text" type="text" name="{{'task'+(ind+1)}}" [(ngModel)]="task.name">
+			<div class="icons save" (click)="save(task)"></div>
+			<div class="icons delete" (click)="delete(task)"></div>
+			<div class="tasks subtasks-indent" *ngFor="let subtask of tasksMap.get(task); let subind = index">
+				<span class="task-number text">{{ind + 1 + '.' + (subind + 1)}}.</span>
+				<input class="text" type="text" name="{{'subtask' + (ind + 1) + (subind + 1)}}" [(ngModel)]="subtask.name">
+				<div class="icons save" (click)="save(subtask)"></div>
+				<div class="icons delete" (click)="delete(subtask)"></div>
+			</div>
+		</div>
+	</form>
+</div>
